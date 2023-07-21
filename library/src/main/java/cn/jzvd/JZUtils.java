@@ -67,6 +67,11 @@ public class JZUtils {
         if (context instanceof Activity) {
             return (Activity) context;
         } else if (context instanceof ContextWrapper) {
+            if (context instanceof Application) {
+                // Si le contexte est une instance de l'application, renvoyez null
+                // pour éviter les boucles infinies dans certains cas
+                return null;
+            }
             return scanForActivity(((ContextWrapper) context).getBaseContext());
         }
 
