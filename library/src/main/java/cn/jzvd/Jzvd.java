@@ -990,7 +990,11 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
         vg.removeView(this);
         cloneAJzvd(vg);
         CONTAINER_LIST.add(vg);
-        vg = (ViewGroup) (JZUtils.scanForActivity(jzvdContext)).getWindow().getDecorView();
+        if (JZUtils.scanForActivity(jzvdContext) != null) {
+            vg = (ViewGroup) (JZUtils.scanForActivity(jzvdContext)).getWindow().getDecorView();
+        } else {
+            return;
+        }
 
         ViewGroup.LayoutParams fullLayout = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
